@@ -138,6 +138,15 @@ static NSString *const kJTCalendarDaySelected = @"kJTCalendarDaySelected";
     
     textLabel.text = [dateFormatter stringFromDate:date];
     
+    static NSDateFormatter *dateFormatterForKIF;
+    if(!dateFormatterForKIF){
+        dateFormatterForKIF = [NSDateFormatter new];
+        dateFormatterForKIF.timeZone = self.calendarManager.calendarAppearance.calendar.timeZone;
+        [dateFormatterForKIF setDateFormat:@"dd-MM-yyyy"];
+    }
+    
+    self.accessibilityLabel = [dateFormatterForKIF stringFromDate:date];
+    
     cacheIsToday = -1;
     cacheCurrentDateText = nil;
 }
